@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1920, initial-scale=1">
+  <title>TizenOS Plex</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="$WEBAPIS/webapis/webapis.js"></script>
+</head>
+<body>
+  <div id="ui-root">
+  <object id="av-player" type="application/avplayer"></object>
+  <div id="shell">
+    <header><div class="brand"><span class="brand-mark">T</span> TizenOS <span class="muted">/ PLEX</span></div><div id="connection">Unofficial Plex client · Preview 0.4.3</div></header>
+    <nav id="navigation" aria-label="Main navigation"></nav>
+    <section id="focused-item" aria-label="Focused title" hidden><h2 id="focused-title"></h2><p id="focused-meta"></p></section>
+    <main id="main"></main>
+    <footer><span id="navigation-hint">← ↑ ↓ → Navigate · OK Select · Back Return</span><span>Samsung TV client · Preview</span></footer>
+  </div>
+  <div id="player-ui" hidden>
+    <div id="player-message" role="status"></div>
+    <div id="player-controls"><h2 id="playing-title"></h2><p id="playback-mode" class="muted"></p><div id="progress" tabindex="0" role="button" aria-label="Preview a seek: Left, Right or OK opens the timeline; OK confirms and Back cancels"><div id="progress-fill"></div></div><p id="playback-time"></p><p id="playback-context"></p><div id="player-buttons"><button id="control-toggle" type="button">Pause</button><button id="control-backward" type="button">Backward</button><button id="control-forward" type="button">Forward</button><button id="control-audio" type="button">Audio</button><button id="control-subtitles" type="button">Subtitles</button><button id="control-timeline" type="button">Timeline</button><button id="control-next" type="button" hidden>Next episode</button><button id="control-more" type="button">More</button></div><p class="muted">Left / Right on the timeline: preview a jump · OK: confirm · Back: cancel or hide controls</p></div>
+    <div id="subtitles" aria-live="off"><span id="subtitle-text"></span></div>
+  </div>
+    <div id="playback-menu" role="dialog" aria-modal="true" aria-labelledby="playback-menu-title" hidden>
+      <section class="playback-menu-panel"><h2 id="playback-menu-title"></h2><p id="playback-menu-hint" class="muted"></p><div id="playback-menu-options"></div></section>
+    </div>
+  <div id="toast" role="status" hidden></div>
+  </div>
+  <script src="core.js"></script>
+  <script src="features.js"></script>
+  <script src="saved.js"></script>
+  <script src="qr.js"></script>
+  <script src="services.js"></script>
+  <script src="home.js"></script>
+  <script src="preview.js"></script>
+  <script src="subtitles.js"></script>
+  <script src="player.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

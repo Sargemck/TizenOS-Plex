@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="https://tizenosplex.local/app" version="0.4.3" viewmodes="maximized">
+  <tizen:application id="TizenPlex1.TizenOSPlex" package="TizenPlex1" required_version="5.0"/>
+  <name>TizenOS Plex</name>
+  <content src="index.html"/>
+  <icon src="icon.png"/>
+  <access origin="*" subdomains="true"/>
+  <tizen:profile name="tv-samsung"/>
+  <tizen:privilege name="http://tizen.org/privilege/internet"/>
+  <tizen:privilege name="http://tizen.org/privilege/tv.inputdevice"/>
+  <tizen:privilege name="http://developer.samsung.com/privilege/appcommon"/>
+  <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
+  <tizen:privilege name="http://tizen.org/privilege/filesystem.read"/>
+  <tizen:privilege name="http://tizen.org/privilege/filesystem.write"/>
+  <tizen:metadata key="http://samsung.com/tv/metadata/use.preview" value="bg_service"/>
+  <tizen:service id="TizenPlex1.Preview" auto-restart="false">
+    <tizen:content src="preview-service.js"/>
+    <tizen:name>TizenOS Plex Preview</tizen:name>
+    <tizen:icon src="icon.png"/>
+    <tizen:description>Optional personal TV home preview</tizen:description>
+    <tizen:category name="http://tizen.org/category/service"/>
+  </tizen:service>
+  <tizen:app-control>
+    <tizen:src name="index.html" reload="disable"/>
+    <tizen:operation name="http://samsung.com/appcontrol/operation/eden_resume"/>
+  </tizen:app-control>
+  <tizen:setting screen-orientation="landscape" context-menu="disable" background-support="disable" encryption="disable" install-location="auto" hwkey-event="enable"/>
+  <tizen:metadata key="http://samsung.com/tv/metadata/screen.size" value="normal"/>
+  <tizen:content-security-policy>default-src 'self'; script-src 'self' $WEBAPIS; style-src 'self'; img-src 'self' data: http: https:; connect-src http: https:; media-src http: https:; object-src 'self'</tizen:content-security-policy>
+</widget>

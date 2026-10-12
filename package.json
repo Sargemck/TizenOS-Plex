@@ -1,0 +1,17 @@
+{
+  "name": "tizenos-plex",
+  "version": "0.4.3",
+  "private": true,
+  "license": "MIT",
+  "description": "Unofficial Samsung Tizen Plex client; initial Tizen 5.0 baseline",
+  "scripts": {
+    "test": "node --test tests/core.test.cjs tests/player.test.cjs tests/installer.test.cjs tests/features.test.cjs tests/subtitles.test.cjs tests/services.test.cjs tests/preview.test.cjs tests/qr.test.cjs tests/saved.test.cjs tests/release.test.cjs",
+    "test:browser": "node tests/browser.cjs && node tests/features-browser.cjs && node tests/navigation-browser.cjs && node tests/experience-browser.cjs && node tests/home-browser.cjs && node tests/ui-browser.cjs && node tests/search-browser.cjs && node tests/ux-browser.cjs && node tests/density-browser.cjs && node tests/reset-progress-browser.cjs && node tests/seek-preview-browser.cjs && node tests/saved-browser.cjs && node tests/series-browser.cjs && node tests/completion-browser.cjs && node tests/account-browser.cjs",
+    "test:performance": "node tests/performance.cjs",
+    "check": "node --check app/app.js && node --check app/core.js && node --check app/player.js && node --check app/features.js && node --check app/services.js && node --check app/subtitles.js && node --check app/home.js && node --check app/preview.js && node --check app/preview-service.js && node --check app/qr.js && node --check app/saved.js",
+    "test:qr": "node tests/qr-browser.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.64.0"
+  }
+}
