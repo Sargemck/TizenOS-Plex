@@ -13,9 +13,19 @@ The stable application ID is `TizenPlex1.TizenOSPlex`, package ID `TizenPlex1`, 
 
 ## Verification
 
-Follow the [README development setup](README.md#development-and-verification). Run `npm test`, `npm run check` and the relevant browser suite while developing, then the full browser suite before proposing runtime changes. Add regression coverage for observable defects and meaningful failure paths. Check normal/larger text, long Japanese/Chinese text, focus restoration and screen bounds when changing UI.
+Use Node.js 22 or later and an installed Microsoft Edge. Installer tests require Windows; tests use synthetic media and server responses and do not operate a TV.
 
-Use `npm run test:performance` for changes affecting startup, browsing or playback preparation. Describe the baseline, environment and limits; neither mocked readiness nor AVPlay's ready callback measures visible smoothness. Use `npm run test:qr` when modifying pairing or QR rendering.
+```powershell
+npm ci --ignore-scripts
+npm test
+npm run check
+$env:PLAYWRIGHT_CHANNEL = 'msedge'
+npm run test:browser
+```
+
+Run the relevant browser suite while developing, then the full suite before proposing runtime changes. Add regression coverage for observable defects and meaningful failure paths. Check normal/larger text, long Japanese/Chinese text, focus restoration and screen bounds when changing UI.
+
+Use `npm run test:performance` for changes affecting startup, browsing or playback preparation. Optionally set `PLEX_BENCHMARK_BASELINE` to an older extracted `app` folder for comparison. Describe the baseline, environment and limits; neither mocked readiness nor AVPlay's ready callback measures visible smoothness. For pairing or QR changes, install the independent decoder with `python -m pip install opencv-python-headless`, then run `npm run test:qr`.
 
 TV testing requires access to a development-enabled device and your own signing profile. Record the model, firmware, Tizen/AVPlay versions and what was actually observed. Distinguish injected key events from physical-remote testing, and restore test preferences/progress where possible. Never operate someone else's TV or mutate their server just to reproduce a report without permission.
 
