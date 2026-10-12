@@ -1,6 +1,6 @@
 # 0.4.3: public-preview release review
 
-Prepared on 12 October 2026. This is a development-preview source release, not a claim of support across all Samsung TVs. The test TV remains on 0.4.2; this review did not operate it or change real account data. Nothing has been published.
+Prepared and published as source on 12 October 2026. This is a development preview, not a claim of support across all Samsung TVs. The test TV remains on 0.4.2; the release review did not change real account data. Installation of 0.4.3 is deferred while the TV is in use.
 
 ## Changes found necessary during review
 
@@ -8,12 +8,13 @@ Prepared on 12 October 2026. This is a development-preview source release, not a
 - **Late watched updates:** a successful watched/unwatched request now refreshes the appropriate cached grid or reopened detail even when the user pressed Back before the reply. Focus and scroll are preserved. A scoped pending-write guard prevents duplicate changes; old-account replies cannot update another account's view or restore cleared local records.
 - **Version consistency:** request headers and Diagnostics use one runtime version constant. New release tests compare it with the manifest, package/lockfile and visible version, and check runtime packaging and license consistency.
 - **Public documentation:** the README now separates product overview from the user guide, describes tested versus intended support, and links contribution/security guidance. Existing limitations remain visible.
-- **Continuous integration:** a read-only Windows GitHub Actions workflow is included for syntax, unit/installer, browser and QR checks, using commit-pinned setup actions. It needs no TV, certificates or household credentials. Hosted CI will run only after publication; no hosted success badge is claimed.
+- **Continuous integration:** a read-only Windows GitHub Actions workflow checks syntax, unit/installer, browser and QR behavior, using commit-pinned setup actions. It needs no TV, certificates or household credentials. [Hosted results](https://github.com/Sargemck/TizenOS-Plex/actions/workflows/checks.yml) are public.
+- **Installer portability:** the first hosted run exposed a Windows PowerShell module-loading difference when reporting package checksums. SHA256 is now calculated directly through .NET; the installer test verifies it against the actual exported package bytes.
 
 ## Release checks
 
 - All **83 unit/installer tests**, runtime syntax checks and **15 browser suites** passed in the local Windows environment. QR images independently decoded at four sizes without network requests.
-- A fresh source-only export installed its locked test dependencies and passed syntax, all 83 unit/installer tests, all 15 browser suites in freshly installed Chromium and independent QR decoding. Subsequent changes were documentation and benchmark-environment labeling only. These local checks used Node 24; the configured hosted CI targets Node 22 and has not yet run.
+- A fresh source-only export installed its locked test dependencies and passed syntax, all 83 unit/installer tests, all 15 browser suites in freshly installed Chromium and independent QR decoding. These local checks used Node 24; hosted CI targets Node 22. The subsequent installer checksum fix passed all nine installer/release checks locally and is covered by hosted CI; app runtime bytes are unchanged.
 - Dependency advisories reported **zero known vulnerabilities**. Gitleaks found no secrets in the source export or reachable Git history; additional source, Git-object, identity and asset-metadata checks were reviewed. Scanning is not an absolute guarantee. Copyright and font-license notices remain intentional.
 - A seven-run desktop comparison against 0.4.2 measured median startup at 274 to 278 ms, focus response at 4 to 3 ms, and mocked playback readiness at 25 to 25 ms. Both builds made two startup server requests and zero cloud requests. This is a controlled regression check, not evidence of TV speed or visual smoothness.
 - Documentation links and whitespace checks passed. Generated packages, raw diagnostic evidence and private state are excluded from public source. The source-only archive also excludes existing Git identity/history; review the commit email before publishing any existing history.
