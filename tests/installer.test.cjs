@@ -47,6 +47,8 @@ test('BuildOnly builds and packages without installing; replaces a stale build',
   const result=f.invoke();
   assert.equal(result.status,0,result.stdout+result.stderr);
   assert.ok(fs.existsSync(f.output));
+  const expectedHash=require('node:crypto').createHash('sha256').update(fs.readFileSync(f.output)).digest('hex').toUpperCase();
+  assert.ok(result.stdout.includes('SHA256: '+expectedHash),'Printed checksum must match the actual exported package');
   const license=fs.readFileSync(path.join(root,'LICENSE'),'utf8');
   assert.equal(fs.readFileSync(path.join(root,'app','LICENSE'),'utf8'),license,'The packaged license must match the source license');
   assert.equal(fs.readFileSync(path.join(f.dir,'app','.buildResult','LICENSE'),'utf8'),license);

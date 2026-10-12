@@ -121,7 +121,18 @@ New-Item -ItemType Directory -Path $Output -Force | Out-Null
 $SignedPackage = Join-Path $Output 'TizenOSPlex.wgt'
 Copy-Item -LiteralPath $Packages[0].FullName -Destination $SignedPackage -Force
 Write-Host "Signed package: $SignedPackage"
-Write-Host "SHA256: $((Get-FileHash -LiteralPath $SignedPackage -Algorithm SHA256).Hash)"
+# Use .NET directly: inherited PowerShell 7 module paths can prevent Windows
+# PowerShell from loading Get-FileHash when invoked by a build/test process.
+$HashAlgorithm = [Security.Cryptography.SHA256]::Create()
+$PackageStream = $null
+try {
+    $PackageStream = [IO.File]::OpenRead($SignedPackage)
+    $PackageHash = [BitConverter]::ToString($HashAlgorithm.ComputeHash($PackageStream)).Replace('-', '')
+} finally {
+    if ($PackageStream) { $PackageStream.Dispose() }
+    $HashAlgorithm.Dispose()
+}
+Write-Host "SHA256: $PackageHash"
 if (!$BuildOnly) {
     Invoke-Tizen -CliArgs @('install', '-s', $Serial, '--name', 'TizenOSPlex.wgt', '--', $Output)
     Invoke-Tizen -CliArgs @('run', '-s', $Serial, '-p', $AppId)
