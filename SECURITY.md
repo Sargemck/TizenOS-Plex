@@ -11,7 +11,7 @@ This is a development-preview client intended for a local Plex server and a TV y
 
 ## Reporting a problem
 
-Do not post tokens, passwords, certificates, private server addresses, full request URLs or real-library captures in a public issue. Use GitHub's [Report a vulnerability](https://github.com/Sargemck/TizenOS-Plex/security/advisories/new) action for a private report. On a fork where private reporting is unavailable, open an issue asking for a private contact method without including the vulnerability details or sensitive data.
+Do not post tokens, passwords, certificates, private server addresses, full request URLs or real-library captures in a public issue. Use GitHub's [Report a vulnerability](https://github.com/Sargemck/samsung-tizen-plex/security/advisories/new) action for a private report. On a fork where private reporting is unavailable, open an issue asking for a private contact method without including the vulnerability details or sensitive data.
 
 Provide the affected version, environment, a minimal reproduction and the likely impact using synthetic/redacted data. Do not access someone else's account or library to demonstrate a problem.
 

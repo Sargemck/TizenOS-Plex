@@ -1,4 +1,4 @@
-# TizenOS Plex
+# TizenOS Plex — an unofficial Plex client for Samsung TVs
 
 A lightweight, unofficial Plex client for Samsung Tizen TVs. Browse a local Plex library with the remote, choose your audio and subtitles, and watch through Samsung's native AVPlay player.
 
